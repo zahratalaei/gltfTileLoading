@@ -1,0 +1,11 @@
+Model Information:
+* title:	pole electric
+* source:	https://sketchfab.com/3d-models/pole-electric-e76da4eef4e84e1c959260a384fc1c28
+* author:	morff (https://sketchfab.com/morff)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "pole electric" (https://sketchfab.com/3d-models/pole-electric-e76da4eef4e84e1c959260a384fc1c28) by morff (https://sketchfab.com/morff) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

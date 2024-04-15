@@ -1,0 +1,182 @@
+{
+    "asset": {
+      "version": "2.0"
+    },
+    "scenes": [
+      {
+        "nodes": [
+          0
+        ]
+      }
+    ],
+    "nodes": [
+        {
+            "children": [1, 2,3,4]
+        },
+        {
+            "mesh": 0
+        },
+        {
+            "mesh": 1
+        },
+        {
+            "mesh": 2
+        },
+        {
+            "mesh": 3
+        }
+    ],
+    "meshes": [
+      {
+        "primitives": [
+          {
+            "mode": 3,
+            "attributes": {
+              "POSITION": 0
+            }
+          }
+        ]
+      },
+      {
+        "primitives": [
+          {
+            "mode": 3,
+            "attributes": {
+              "POSITION": 1
+            }
+          }
+        ]
+      },
+      {
+        "primitives": [
+          {
+            "mode": 3,
+            "attributes": {
+              "POSITION": 2
+            }
+          }
+        ]
+      },
+      {
+        "primitives": [
+          {
+            "mode": 3,
+            "attributes": {
+              "POSITION": 3
+            }
+          }
+        ]
+      }
+    ],
+    "buffers": [
+      {
+        "uri": "data:application/octet-stream;base64,1d9iwM1yXkPuGXfCqgDqwKCGW0NeXGvC4VgywV2lWEPc6V/C68Bwwf7OVUM5wlTC8BuYwXwDU0NM5UnCpF64wdJCUEP0Uj/CYCjZwf2MTUMXCzXCAXn6wfrhSkOfDSvCOSgOwsdBSEOCWiHCVFcfwmOsRUO68RfC1ckwws4hQ0NJ0w7C",
+        "byteLength": 132
+      },
+      {
+        "uri": "data:application/octet-stream;base64,MxSCwGzJXkPtpXPCO/P7wPXjW0MlC2jCs+M7wYsIWUN3tVzC0Md6wSc3VkO9pFHCwFKdwcZvU0PX2EbCMr69wWSyUEOpUTzCGKbewfz+TUMfDzLCKgUAwo5VS0MqESjCa/UQwhe2SEO+Vx7CyiMiwpggRkPY4hTCSZAzwg+VQ0N4sgvC",
+        "byteLength": 132
+      },
+      {
+        "uri": "data:application/octet-stream;base64,OjzMw00mi0IP13hDQuDNw7FEhkJqOntDnovPw+B1gUKdjX1DST7Rw6VzeUKw0H9DQfjSw/8gcELVAYFDg7nUw8TzZkJHE4JDDYLWw+vrXUKxHIND4FHYw3AJVUITHoRD+ijaw1JMTEJtF4VDXQfcw5a0Q0LACIZDCu3dw0FCO0II8oZD",
+        "byteLength": 132
+      },
+      {
+        "uri": "data:application/octet-stream;base64,HC2owkVrzkTHwlNE/B+twip+zkThllREfSyywhaSzkRyZ1VEkFK3wginzkR9NFZELZK8wgG9zkQC/lZETOvBwgDUzkQDxFdE513HwgXszkSBhlhE/OnMwhAFz0R8RVlEio/SwiAfz0T0AFpElE7YwjY6z0TouFpEHyfewlJWz0RZbVtE",
+        "byteLength": 132
+      }
+    ],
+    "bufferViews": [
+      {
+        "buffer": 0,
+        "byteOffset": 0,
+        "byteLength": 132
+      },
+      {
+        "buffer": 1,
+        "byteOffset": 0,
+        "byteLength": 132
+      },
+      {
+        "buffer": 2,
+        "byteOffset": 0,
+        "byteLength": 132
+      },
+      {
+        "buffer": 3,
+        "byteOffset": 0,
+        "byteLength": 132
+      }
+    ],
+    "accessors": [
+      {
+        "bufferView": 0,
+        "byteOffset": 0,
+        "componentType": 5126,
+        "count": 11,
+        "type": "VEC3",
+        "max": [
+          -3.54491156,
+          222.4484405517578,
+          -35.70633206702769
+        ],
+        "min": [
+          -44.19710159301758,
+          195.13204956054688,
+          -61.77532196044922
+        ]
+      },
+      {
+        "bufferView": 1,
+        "byteOffset": 0,
+        "componentType": 5126,
+        "count": 11,
+        "type": "VEC3",
+        "max": [
+          -4.064965724945068,
+          222.78680419921875,
+          -34.924285888671875
+        ],
+        "min": [
+          -44.89090347290039,
+          195.58226013183594,
+          -60.91203689575195
+        ]
+      },
+      {
+        "bufferView": 2,
+        "byteOffset": 0,
+        "componentType": 5126,
+        "count": 11,
+        "type": "VEC3",
+        "max": [
+          -408.47052001953125,
+          69.5748062133789,
+          269.890869140625
+        ],
+        "min": [
+          -443.85186767578125,
+          46.814701080322266,
+          248.84007263183594
+        ]
+      },
+      {
+        "bufferView": 3,
+        "byteOffset": 0,
+        "componentType": 5126,
+        "count": 11,
+        "type": "VEC3",
+        "max": [
+          -84.08810424804688,
+          1658.697509765625,
+          877.7085571289062
+        ],
+        "min": [
+          -111.07640838623047,
+          1651.3521728515625,
+          847.0433959960938
+        ]
+      }
+    ]
+  }
+  

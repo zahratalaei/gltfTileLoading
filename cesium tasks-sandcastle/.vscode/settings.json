@@ -1,0 +1,11 @@
+{
+    "liveServer.settings.port": 5501,
+    "turboConsoleLog.delimiterInsideMessage": ",",
+    "turboConsoleLog.includeFileNameAndLineNum": true,
+    "turboConsoleLog.insertEnclosingClass": true,
+    "turboConsoleLog.insertEnclosingFunction": true,
+    "turboConsoleLog.logMessagePrefix": "",
+    "turboConsoleLog.logFunction": "log",
+    "turboConsoleLog.wrapLogMessage": false,
+    "turboConsoleLog.addSemicolonInTheEnd": true
+}

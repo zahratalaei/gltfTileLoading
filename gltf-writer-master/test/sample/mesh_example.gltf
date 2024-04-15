@@ -1,0 +1,93 @@
+{
+    "asset": {
+      "version": "2.0"
+    },
+    "scenes": [
+      {
+        "nodes": [
+          0,
+          1
+        ]
+      }
+    ],
+    "nodes": [
+      {
+        "mesh": 0
+      },
+      {
+        "mesh": 1
+      }
+    ],
+    "meshes": [
+      {
+        "primitives": [
+          {
+            "mode": 3,
+            "attributes": {
+              "POSITION": 0
+            }
+          }
+        ]
+      }
+    ],
+    "buffers": [
+      {
+        "byteLength": 139,
+        "uri": "data:application/octet-stream;base64,z4ZwymxiGkrFtoPK3YZwymdiGkq+toPK6oZwymNiGkq4toPK+IZwyl9iGkqxtoPKB4dwyltiGkqrtoPKFYdwyldiGkqmtoPKJIdwylNiGkqgtoPKM4dwyk9iGkqatoPKQ4dwykxiGkqVtoPKU4dwykliGkqPtoPKY4dwykZiGkqKtoPK"
+      },
+      {
+        "byteLength": 139,
+        "uri": "data:application/octet-stream;base64,rn1wynpPGkqcwIPKvX1wym5PGkqWwIPKzX1wymNPGkqQwIPK3H1wyldPGkqKwIPK7H1wykxPGkqFwIPK/H1wykFPGkqAwIPKDX5wyjZPGkp7wIPKHX5wyixPGkp2wIPKLn5wyiFPGkpxwIPKP35wyhdPGkpswIPKUX5wyg1PGkpnwIPK"
+      }
+    ],
+    "bufferViews": [
+      {
+        "buffer": 0,
+        "byteOffset": 0,
+        "byteLength": 36
+      },
+      {
+        "buffer": 0,
+        "byteOffset": 36,
+        "byteLength": 36
+      }
+    ],
+    "accessors": [
+        {
+          "bufferView": 0,
+          "byteOffset": 0,
+          "componentType": 5123,
+          "count": 11,
+          "type": "VEC3",
+          "max": [
+            -3940787.8153952765,
+            2529434.9818929895,
+            -4315973.166993579
+          ],
+          "min": [
+            -3940824.6558703957,
+            2529425.4899139325,
+            -4316002.315612853
+          ]
+        },
+        {
+          "bufferView": 1,
+          "byteOffset": 0,
+          "componentType": 5123, 
+          "count": 11, 
+          "type": "VEC3",
+          "max": [
+            -3940787.8153952765,
+            2529434.9818929895,
+            -4315973.166993579
+          ],
+          "min": [
+            -3940824.6558703957,
+            2529425.4899139325,
+            -4316002.315612853
+          ]
+        }
+      ]
+      
+  }
+  

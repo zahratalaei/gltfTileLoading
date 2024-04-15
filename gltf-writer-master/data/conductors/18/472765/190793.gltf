@@ -1,0 +1,527 @@
+{
+  "asset": {
+    "version": "2.0"
+  },
+  "extensionsUsed": [
+    "EXT_mesh_features",
+    "EXT_structural_metadata"
+  ],
+  "scenes": [
+    {
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        -1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "mesh": 0
+    }
+  ],
+  "meshes": [
+    {
+      "primitives": [
+        {
+          "mode": 3,
+          "attributes": {
+            "POSITION": 0,
+            "_FEATURE_ID_0": 2
+          },
+          "extensions": {
+            "EXT_mesh_features": {
+              "featureIds": [
+                {
+                  "featureCount": 11,
+                  "propertyTable": 0,
+                  "attribute": 0
+                }
+              ]
+            }
+          }
+        },
+        {
+          "mode": 3,
+          "attributes": {
+            "POSITION": 1,
+            "_FEATURE_ID_0": 3
+          },
+          "extensions": {
+            "EXT_mesh_features": {
+              "featureIds": [
+                {
+                  "featureCount": 11,
+                  "propertyTable": 0,
+                  "attribute": 0
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "buffers": [
+    {
+      "uri": "data:application/octet-stream;base64,1n71wLE6FUGtqBLByF1bwfoXm8ChmjvB6CefwdhVl8HTB2fBmMrRwSqJA8L0d4rBbssCwsH9OsJYqaLBV0YdwrQIcsIOGLzBDVY4wgBVlMIixNbBnvpTws5wr8KyrfLBITRwwrtXysJ46gfCW4GGwr0J5cIPHRfCQzOVwsaG/8LK7ibCLE8LwTEfIEFTfAHBe31swR6RhMBk4ynBZvWnwQCMkcGrr1TBacvawdeTAMJq8IDBWGAHwrH7N8JZu5jBmuohwpD9bsKYuLHBfwQ9wrrMksIz6MvBFK5YwqjnrcJDSufBbOd0wo7PyMJ57wHCUtiIwmCE48I/0xDC74SXwhMG/sKZUCDCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAADEuMzY0MS40MQAAAAAFAAAACQAAADExLjU1NjExLjk1MgAAAAAGAAAADAAAADE5OTg5NjE5OTg5NgAAAAAGAAAADAAAADIwMjItMTItMTgyMDIyLTEyLTE4AAAAAAoAAAAUAAAAMTE6NTU6NDMxMTo1NTo0MwAAAAAIAAAAEAAAADU5MjE1NDU5MjE1MwAAAAAGAAAADAAAADE1Ni4yMTU2AAAAAAUAAAAIAAAAMjJfNy8zLjAwX0FBQV8ycGgyMl83LzMuMDBfQUFBXzJwaAAAAAARAAAAIgAAAE5vcnRoIFdlc3ROb3J0aCBXZXN0AAAAAAoAAAAUAAAAMC44OTEwLjg5MQAAAAAFAAAACgAAAE1hcnJhd2FoIFNvdXRoTWFycmF3YWggU291dGgAAAAADgAAABwAAAA0LjY0NDQuNzEyAAAAAAUAAAAKAAAAMzkuMzU0MzkuOTMyAAAAAAYAAAAMAAAANi44Ni45AAAAAAMAAAAGAAAANi45Ny4zAAAAAAMAAAAGAAAAMTEuODExLjgAAAAABAAAAAgAAAAyMmtWMjJrVgAAAAAEAAAACAAAAA==",
+      "byteLength": 787
+    }
+  ],
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteOffset": 0,
+      "byteLength": 132,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 132,
+      "byteLength": 132,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 264,
+      "byteLength": 44,
+      "byteStride": 4,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 308,
+      "byteLength": 44,
+      "byteStride": 4,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 352,
+      "byteLength": 9
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 361,
+      "byteLength": 12
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 373,
+      "byteLength": 12
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 385,
+      "byteLength": 12
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 397,
+      "byteLength": 12
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 409,
+      "byteLength": 12
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 421,
+      "byteLength": 20
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 441,
+      "byteLength": 12
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 453,
+      "byteLength": 16
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 469,
+      "byteLength": 12
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 481,
+      "byteLength": 12
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 493,
+      "byteLength": 12
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 505,
+      "byteLength": 8
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 513,
+      "byteLength": 12
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 525,
+      "byteLength": 34
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 559,
+      "byteLength": 12
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 571,
+      "byteLength": 20
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 591,
+      "byteLength": 12
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 603,
+      "byteLength": 10
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 613,
+      "byteLength": 12
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 625,
+      "byteLength": 28
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 653,
+      "byteLength": 12
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 665,
+      "byteLength": 10
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 675,
+      "byteLength": 12
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 687,
+      "byteLength": 12
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 699,
+      "byteLength": 12
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 711,
+      "byteLength": 6
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 717,
+      "byteLength": 12
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 729,
+      "byteLength": 6
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 735,
+      "byteLength": 12
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 747,
+      "byteLength": 8
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 755,
+      "byteLength": 12
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 767,
+      "byteLength": 8
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 775,
+      "byteLength": 12
+    }
+  ],
+  "accessors": [
+    {
+      "name": "POSITION",
+      "bufferView": 0,
+      "byteOffset": 0,
+      "componentType": 5126,
+      "count": 11,
+      "type": "VEC3",
+      "max": [
+        -7.671732760965824,
+        9.326828578021377,
+        -9.166180887725204
+      ],
+      "min": [
+        -74.60012000007555,
+        -127.76322675356641,
+        -41.73319405736402
+      ]
+    },
+    {
+      "name": "POSITION",
+      "bufferView": 1,
+      "byteOffset": 0,
+      "componentType": 5126,
+      "count": 11,
+      "type": "VEC3",
+      "max": [
+        -8.7068288391456,
+        10.00761502282694,
+        -8.092852182686329
+      ],
+      "min": [
+        -75.75963947921991,
+        -127.01186421420425,
+        -40.07870725542307
+      ]
+    },
+    {
+      "name": "FeatureId",
+      "bufferView": 2,
+      "byteOffset": 0,
+      "componentType": 5121,
+      "count": 11,
+      "type": "SCALAR",
+      "normalized": false
+    },
+    {
+      "name": "FeatureId",
+      "bufferView": 3,
+      "byteOffset": 0,
+      "componentType": 5121,
+      "count": 11,
+      "type": "SCALAR",
+      "normalized": false
+    }
+  ],
+  "materials": [
+    {
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          1,
+          0,
+          0,
+          1
+        ]
+      }
+    }
+  ],
+  "extensions": {
+    "EXT_structural_metadata": {
+      "schema": {
+        "classes": {
+          "conductorMetadata": {
+            "properties": {
+              "Ambient_Tension": {
+                "name": "Ambient_Tension",
+                "description": "Ambient Tension",
+                "type": "STRING"
+              },
+              "Ambient_Tension_CBL": {
+                "name": "Ambient_Tension_CBL",
+                "description": "Ambient Tension CBL",
+                "type": "STRING"
+              },
+              "Bay_Id": {
+                "name": "Bay_Id",
+                "description": "Bay Id",
+                "type": "STRING"
+              },
+              "Captured_Date": {
+                "name": "Captured_Date",
+                "description": "Captured Date",
+                "type": "STRING"
+              },
+              "Captured_Time": {
+                "name": "Captured_Time",
+                "description": "Captured Time",
+                "type": "STRING"
+              },
+              "ConductorId": {
+                "name": "ConductorId",
+                "description": "ConductorId",
+                "type": "STRING"
+              },
+              "Conductor_Length": {
+                "name": "Conductor_Length",
+                "description": "Conductor Length",
+                "type": "STRING"
+              },
+              "Conductor_Type": {
+                "name": "Conductor_Type",
+                "description": "Conductor Type",
+                "type": "STRING"
+              },
+              "Depot": {
+                "name": "Depot",
+                "description": "Depot",
+                "type": "STRING"
+              },
+              "K_Factor": {
+                "name": "K_Factor",
+                "description": "K Factor",
+                "type": "STRING"
+              },
+              "MaintenanceArea": {
+                "name": "MaintenanceArea",
+                "description": "MaintenanceArea",
+                "type": "STRING"
+              },
+              "MaxWind_Tension": {
+                "name": "MaxWind_Tension",
+                "description": "MaxWind Tension",
+                "type": "STRING"
+              },
+              "MaxWind_Tension_CBL": {
+                "name": "MaxWind_Tension_CBL",
+                "description": "MaxWind Tension CBL",
+                "type": "STRING"
+              },
+              "Minimum_Ground_Clearance": {
+                "name": "Minimum_Ground_Clearance",
+                "description": "Minimum Ground Clearance",
+                "type": "STRING"
+              },
+              "Minimum_Road_Clearance": {
+                "name": "Minimum_Road_Clearance",
+                "description": "Minimum Road Clearance",
+                "type": "STRING"
+              },
+              "Nominal_Breaking_Load": {
+                "name": "Nominal_Breaking_Load",
+                "description": "Nominal Breaking Load",
+                "type": "STRING"
+              },
+              "Voltage": {
+                "name": "Voltage",
+                "description": "Voltage",
+                "type": "STRING"
+              }
+            }
+          }
+        }
+      },
+      "propertyTables": [
+        {
+          "name": "ConductorPropertyTable",
+          "class": "conductorMetadata",
+          "count": 2,
+          "properties": {
+            "Ambient_Tension": {
+              "values": 4,
+              "stringOffsets": 5
+            },
+            "Ambient_Tension_CBL": {
+              "values": 6,
+              "stringOffsets": 7
+            },
+            "Bay_Id": {
+              "values": 8,
+              "stringOffsets": 9
+            },
+            "Captured_Date": {
+              "values": 10,
+              "stringOffsets": 11
+            },
+            "Captured_Time": {
+              "values": 12,
+              "stringOffsets": 13
+            },
+            "ConductorId": {
+              "values": 14,
+              "stringOffsets": 15
+            },
+            "Conductor_Length": {
+              "values": 16,
+              "stringOffsets": 17
+            },
+            "Conductor_Type": {
+              "values": 18,
+              "stringOffsets": 19
+            },
+            "Depot": {
+              "values": 20,
+              "stringOffsets": 21
+            },
+            "K_Factor": {
+              "values": 22,
+              "stringOffsets": 23
+            },
+            "MaintenanceArea": {
+              "values": 24,
+              "stringOffsets": 25
+            },
+            "MaxWind_Tension": {
+              "values": 26,
+              "stringOffsets": 27
+            },
+            "MaxWind_Tension_CBL": {
+              "values": 28,
+              "stringOffsets": 29
+            },
+            "Minimum_Ground_Clearance": {
+              "values": 30,
+              "stringOffsets": 31
+            },
+            "Minimum_Road_Clearance": {
+              "values": 32,
+              "stringOffsets": 33
+            },
+            "Nominal_Breaking_Load": {
+              "values": 34,
+              "stringOffsets": 35
+            },
+            "Voltage": {
+              "values": 36,
+              "stringOffsets": 37
+            }
+          }
+        }
+      ]
+    }
+  }
+}
