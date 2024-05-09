@@ -16,6 +16,7 @@
     "import": "./src/index.mjs"
   },
   "scripts": {
+    "server": "nodemon server.js",
     "test": "mocha",
     "coverage": "c8 npm run test "
   },
@@ -28,10 +29,17 @@
     "mocha": "^10.2.0"
   },
   "dependencies": {
-    "3d-tiles-tools": "^0.3.2",
+    "3d-tiles-tools": "^0.4.1",
     "3d-tiles-validator": "^0.5.0",
     "cesium": "^1.112.0",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
     "fs-extra": "^11.1.1",
-    "gltf-pipeline": "^4.1.0"
+    "gltf-pipeline": "^4.1.0",
+    "graceful-fs": "^4.2.11",
+    "ml-matrix": "^6.11.0",
+    "nodemon": "^3.1.0",
+    "stream-chain": "^2.2.5",
+    "stream-json": "^1.8.0"
   }
 }

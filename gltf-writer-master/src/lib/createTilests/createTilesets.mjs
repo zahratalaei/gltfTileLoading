@@ -1,5 +1,8 @@
 import fs from 'fs';
 import path from 'path';
+import { Buffer } from 'buffer';
+import * as Cesium from 'cesium';
+import { Matrix, EigenvalueDecomposition } from 'ml-matrix';
 
 // Function to compute the bounding box from accessor min and max values
 function computeBoundingBoxFromAccessors(accessors) {
@@ -18,6 +21,7 @@ function computeBoundingBoxFromAccessors(accessors) {
   return { globalMin, globalMax };
 }
 
+
 function calculateBoundingBox(cartesianPoints) {
   let minX = Infinity,
     maxX = -Infinity,
@@ -34,6 +38,7 @@ function calculateBoundingBox(cartesianPoints) {
     minZ = Math.min(minZ, point.z);
     maxZ = Math.max(maxZ, point.z);
   });
+  
 
   // Calculate center and dimensions
   const centerX = (minX + maxX) / 2;
@@ -42,22 +47,12 @@ function calculateBoundingBox(cartesianPoints) {
   const width = maxX - minX;
   const height = maxY - minY;
   const depth = maxZ - minZ;
+  const center = new Cesium.Cartesian3(centerX, centerY, centerZ);
+  const halfAxes = Cesium.Matrix3.fromScale(new Cesium.Cartesian3(width, height, depth), new Cesium.Matrix3());
 
-  // Return the bounding box in the format required by 3D Tiles
-  return [
-    centerX,
-    centerY,
-    centerZ,
-    width / 2,
-    0,
-    0, // x-axis half-length vector
-    0,
-    height / 2,
-    0, // y-axis half-length vector
-    0,
-    0,
-    depth / 2 // z-axis half-length vector
-  ];
+const obb = new Cesium.OrientedBoundingBox(center, halfAxes)
+return obb
+ 
 }
 
 // Function to create the bounding volume box from global min and max
@@ -72,11 +67,57 @@ function createBoundingVolumeBox(globalMin, globalMax) {
   ];
 }
 
-function createTilesetJson(gltfPath) {
- const gltfContent = JSON.parse(fs.readFileSync(gltfPath, 'utf-8'));
-  const { globalMin, globalMax } = computeBoundingBoxFromAccessors(gltfContent.accessors);
+function decodeDataURI(dataURI) {
+  const base64String = dataURI.split(',')[1];
+  const binaryString = atob(base64String);
+  const length = binaryString.length;
+  const bytes = new Uint8Array(length);
+  for (let i = 0; i < length; i++) {
+    bytes[i] = binaryString.charCodeAt(i);
+  }
+  return Buffer.from(bytes.buffer);
+}
 
-  const boundingVolumeBox = createBoundingVolumeBox(globalMin, globalMax);
+// Function to extract the flatCartesianArray from the decoded Buffer
+function extractCartesianArray(buffer, cartesianBufferLength) {
+  // Extract the cartesian data buffer
+  const cartesianBuffer = buffer.slice(0, cartesianBufferLength);
+  // Convert the Buffer to a Float32Array
+  const cartesianArray = new Float32Array(cartesianBuffer.buffer, cartesianBuffer.byteOffset, cartesianBuffer.length / Float32Array.BYTES_PER_ELEMENT);
+  // Convert Flat Cartesian Array to structured format
+  const cartesianCoordinates = [];
+  for (let i = 0; i < cartesianArray.length; i += 3) {
+    cartesianCoordinates.push({
+      x: cartesianArray[i],
+      y: cartesianArray[i + 1],
+      z: cartesianArray[i + 2]
+    });
+  }
+  return cartesianCoordinates;
+  //   return cartesianArray;
+}
+
+
+function createTilesetJson(gltfPath) {
+  const gltfContent = JSON.parse(fs.readFileSync(gltfPath, 'utf-8'));
+  // const { globalMin, globalMax } = computeBoundingBoxFromAccessors(gltfContent.accessors);
+  const dataURI = gltfContent.buffers[0].uri;
+  const decodedBuffer = decodeDataURI(dataURI);
+  const cartesianBufferLength = gltfContent.meshes[0].primitives.length * 11 * 4 * 3;
+  const flatCartesianArray = extractCartesianArray(decodedBuffer, cartesianBufferLength);
+  const obb = Cesium.OrientedBoundingBox.fromPoints(flatCartesianArray);
+  const center = obb.center;
+  const halfAxes = obb.halfAxes;
+// Create an array consisting of the center and halfAxes values
+const combinedArray = [
+    center.x, center.y, center.z, 
+    halfAxes['0'], halfAxes['1'], halfAxes['2'],
+    halfAxes['3'], halfAxes['4'], halfAxes['5'],
+    halfAxes['6'], halfAxes['7'], halfAxes['8']
+];
+
+  // const boundingVolumeBox = createBoundingVolumeBox(globalMin, globalMax);
+  
   const tilesetJson = {
     asset: {
       version: '1.1'
@@ -84,7 +125,7 @@ function createTilesetJson(gltfPath) {
     geometricError: 4096,
     root: {
       boundingVolume: {
-        box: boundingVolumeBox
+        box: combinedArray
       },
       geometricError: 512,
       content: {
@@ -94,10 +135,10 @@ function createTilesetJson(gltfPath) {
     }
   };
 
-  const tilesetJsonPath = gltfPath.replace('.gltf', '.tileset.json');
+  const tilesetJsonPath = gltfPath.replace('.gltf', '.json');
   fs.writeFileSync(tilesetJsonPath, JSON.stringify(tilesetJson, null, 2));
   console.log(`Tileset JSON created at: ${tilesetJsonPath}`);
-  };
+};
 
   
 // Function to recursively walk through directory tree and process GLTF files
@@ -119,5 +160,6 @@ function walkDirectory(currentPath) {
 }
 
 // Start walking from the base directory of your 'conductors'
-const baseDirectory = '../../../data/conductors/18';
+// const baseDirectory = '../../tilesets';
+const baseDirectory = '../../../../data/conductors/18';
 walkDirectory(baseDirectory);

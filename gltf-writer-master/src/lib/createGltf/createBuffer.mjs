@@ -1,6 +1,83 @@
 import { Buffer } from 'buffer';
-import { calculateTileCenterInCartesian } from './helper.mjs';
+import { calculateTileCenter, concatenateTypedArrays, createStringBufferWithStringOffset, localizeCoordinates, uint8ArrayToBase64 } from './helper.mjs';
 
+// Creates a data URI from the provided data.
+export function createDataURIfromData(data, x, y) {
+  const tileCenter = calculateTileCenter(x, y, 18);
+
+  const localizedData = data.map(item => ({
+    ...item, // Spread existing item properties
+    cartesian: item.cartesian.map(point => localizeCoordinates(point, tileCenter)) // Localize each point
+  }));
+  const cartesiansArray = localizedData.map(item => item.cartesian);
+  //  Create a flat array of all cartesian points and then create a buffer of them
+  const flatCartesians = localizedData.flatMap(item => item.cartesian).flat();
+  const flatCartesiansArray = new Float32Array(flatCartesians.map(point => [point.x, point.y, point.z]).flat());
+  // Convert Float32Array to Node.js Buffer
+  const cartesianBuffer = Buffer.from(flatCartesiansArray.buffer);
+
+  //  Assign featureId to each cartesians set and create an array of those indexes
+  const featureIds = data.flatMap((item, index) => Array(item.cartesian.length).fill(index));
+
+  // Encode featureIds as binary data using Int32Array
+  const featureIdsArray = new Int32Array(featureIds);
+  const featureIdsBuffer = Buffer.from(featureIdsArray.buffer);
+
+  const allStringsBinary = [];
+  const metaDataBuffer = [];
+  const attributes = Object.keys(data[0]).reduce((acc, key) => {
+    if (key !== 'color' && key !== 'cartesian') {
+      // Transform each item's value for the current key based on your criteria
+      const values = data.map(item => {
+        const value = item[key];
+        // Convert numbers to strings and handle undefined values by converting them to "NA"
+        if (typeof value === 'number') {
+          return value.toString();
+        } else if (typeof value === 'undefined') {
+          return 'NA';
+        } else {
+          return value;
+        }
+      });
+      const encodedValues = createStringBufferWithStringOffset(values);
+      metaDataBuffer.push(encodedValues);
+      allStringsBinary.push(encodedValues.encodedStrings); // Directly use the binary data
+      allStringsBinary.push(encodedValues.stringsOffsetsBuffer); // Convert Uint32Array to Uint8Array if needed
+      // Push the transformed values array under the current key
+      acc.push({ [key]: values });
+    }
+    return acc;
+  }, []);
+  const metadataCombinedArray = concatenateTypedArrays(allStringsBinary);
+  const metadataCombinedArrayBuffer = Buffer.from(metadataCombinedArray);
+
+  // Create an array of these lengths
+  const bufferLengthsArray = {
+    cartesianBufferLength: cartesianBuffer.length,
+    featureIdsBufferLength: featureIdsBuffer.length,
+    bufferStringLength: metadataCombinedArrayBuffer.length
+  };
+  const lengthsTypedArray = new Uint32Array([bufferLengthsArray.cartesianBufferLength, bufferLengthsArray.featureIdsBufferLength, bufferLengthsArray.bufferStringLength]);
+
+  // Concatenate all buffers: cartesian data, feature IDs, and attributes
+  const combinedBuffer = Buffer.concat([cartesianBuffer, featureIdsBuffer, metadataCombinedArrayBuffer]);
+  // Convert the combined buffer to Base64 string for transmission/storage
+  const combinedBase64String = uint8ArrayToBase64(combinedBuffer);
+  // const combinedBase64String = combinedBuffer.toString('base64');
+  // Creating a combined data URI
+  const dataURI = `data:application/octet-stream;base64,${combinedBase64String}`;
+  // Return both the data URI and the byte length of the combined buffer
+  return {
+    dataURI: dataURI,
+    combinedBufferByteLength: combinedBuffer.length,
+    cartesiansArray: cartesiansArray,
+    lengthsTypedArray: lengthsTypedArray,
+    attributes: attributes,
+    metaDataBuffer: metaDataBuffer
+  };
+}
+
+// // Example usage:
 // const data = [
 //   {
 //     cartesian: [
@@ -227,161 +304,7 @@ import { calculateTileCenterInCartesian } from './helper.mjs';
 //     Voltage: 'Service'
 //   }
 // ];
-const encoder = new TextEncoder();
 
-// Localizes the coordinates of a point relative to a given center.
-export function localizeCoordinates(point, center) {
-  return {
-    x: point.x - center.x,
-    y: point.y - center.y,
-    z: point.z - center.z
-  };
-}
-
-// Converts a Uint8Array to a base64-encoded string.
-function uint8ArrayToBase64(uint8Array) {
-    let binaryString = '';
-    for (let i = 0; i < uint8Array.byteLength; i++) {
-      binaryString += String.fromCharCode(uint8Array[i]);
-    }
-    return btoa(binaryString);
-  }
-
-// Concatenates multiple typed arrays into a single Uint8Array.
-function concatenateTypedArrays(arrays) {
-  // Calculate the total length of all arrays
-  let totalLength = arrays.reduce((acc, value) => acc + value.length, 0);
-
-  // Create a new array with the total length
-  let result = new Uint8Array(totalLength);
-
-  // Copy each array into the result array
-  let length = 0;
-  for (let array of arrays) {
-    result.set(array, length);
-    length += array.length;
-  }
-
-  return result;
-}
-
-// Creates a buffer containing encoded strings along with their offsets.
- function createStringBufferWithStringOffset(stringsArray) {
-   const concatenatedStrings = stringsArray.join('');
-   const encodedStrings = encoder.encode(concatenatedStrings);
-   const encodedStringsByteLength = encodedStrings.byteLength;
-   let stringOffset = 0;
-   const stringsOffsets = stringsArray.map(string => {
-     const offset = stringOffset;
-     stringOffset += encoder.encode(string).length;
-     return offset;
-   });
-   stringsOffsets.push(stringOffset);
-   const offsetsBuffer = new Uint32Array(stringsOffsets);
-   const stringsOffsetsBuffer = new Uint8Array(offsetsBuffer.buffer);
-   const stringsOffsetsBufferLength = stringsOffsetsBuffer.byteLength;
-
-   return {
-     encodedStrings: encodedStrings, // The binary data for the encoded strings
-     stringsOffsetsBuffer: stringsOffsetsBuffer, // The binary data for the strings' offsets
-     encodedStringsByteLength: encodedStringsByteLength, // Length of the encoded strings data
-     offsetsBufferLength: stringsOffsetsBufferLength, // Length of the offsets data
-     totalBufferLength: encodedStringsByteLength + stringsOffsetsBufferLength // Total length of all binary data
-   };
- }
-  //  let x = 472760;
-  //  let y = 190794;
-// Creates a data URI from the provided data.
-export function createDataURIfromData(data,x,y) {
-  console.log("🚀 ~ createDataURIfromData ~ y:", y)
-  console.log("🚀 ~ createDataURIfromData ~ x:", x)
-  // let x = 472760;
-  // let y = 190794;
-
-  const tileCenter = calculateTileCenterInCartesian(x, y, 18);
-
- 
-  const localizedData = data.map(item => ({
-    ...item, // Spread existing item properties
-    cartesian: item.cartesian.map(point => localizeCoordinates(point, tileCenter)) // Localize each point
-  }));
-  const cartesiansArray = localizedData.map(item => item.cartesian);
-
-  //  Create a flat array of all cartesian points and then create a buffer of them
-  const flatCartesians = localizedData.flatMap(item => item.cartesian).flat();
-  const flatCartesiansArray = new Float32Array(flatCartesians.map(point => [point.x, point.y, point.z]).flat());
-  // Convert Float32Array to Node.js Buffer
-  const cartesianBuffer = Buffer.from(flatCartesiansArray.buffer);
-
-  //  Assign featureId to each cartesians set and create an array of those indexes
-  const featureIds = data.flatMap((item, index) => Array(item.cartesian.length).fill(index));
-
-  // Encode featureIds as binary data using Int32Array
-  const featureIdsArray = new Int32Array(featureIds);
-  const featureIdsBuffer = Buffer.from(featureIdsArray.buffer);
-  
- 
-  const allStringsBinary = [];
-  const metaDataBuffer = [];
-  const attributes = Object.keys(data[0]).reduce((acc, key) => {
-    if (key !== 'color' && key !== 'cartesian') {
-      // Transform each item's value for the current key based on your criteria
-      const values = data.map(item => {
-        const value = item[key];
-        // Convert numbers to strings and handle undefined values by converting them to "NA"
-        if (typeof value === 'number') {
-          return value.toString();
-        } else if (typeof value === 'undefined') {
-          return 'NA';
-        } else {
-          return value;
-        }
-      });
-      const encodedValues = createStringBufferWithStringOffset(values);
-      metaDataBuffer.push(encodedValues);
-      allStringsBinary.push(encodedValues.encodedStrings); // Directly use the binary data
-      allStringsBinary.push(encodedValues.stringsOffsetsBuffer); // Convert Uint32Array to Uint8Array if needed
-      // Push the transformed values array under the current key
-      acc.push({ [key]: values });
-    }
-    return acc;
-  }, []);
-  const metadataCombinedArray = concatenateTypedArrays(allStringsBinary);
-  const metadataCombinedArrayBuffer = Buffer.from(metadataCombinedArray)
-
-  // Create an array of these lengths
-  const bufferLengthsArray = {
-    cartesianBufferLength: cartesianBuffer.length,
-    featureIdsBufferLength: featureIdsBuffer.length,
-    bufferStringLength: metadataCombinedArrayBuffer.length
-  };
-  const lengthsTypedArray = new Uint32Array([
-    bufferLengthsArray.cartesianBufferLength,
-    bufferLengthsArray.featureIdsBufferLength,
-    bufferLengthsArray.bufferStringLength
-  ]);
-
-  // Concatenate all buffers: cartesian data, feature IDs, and attributes
-  const combinedBuffer = Buffer.concat([cartesianBuffer, featureIdsBuffer, metadataCombinedArrayBuffer]);
-  // Convert the combined buffer to Base64 string for transmission/storage
-  const combinedBase64String = uint8ArrayToBase64(combinedBuffer);
-  // const combinedBase64String = combinedBuffer.toString('base64');
-  // Creating a combined data URI
-  const dataURI = `data:application/octet-stream;base64,${combinedBase64String}`;
-  // Return both the data URI and the byte length of the combined buffer
-  return {
-    dataURI: dataURI,
-    combinedBufferByteLength: combinedBuffer.length,
-    cartesiansArray: cartesiansArray,
-    lengthsTypedArray: lengthsTypedArray,
-    attributes: attributes,
-    metaDataBuffer: metaDataBuffer
-  };
-}
-
-//  // Example usage:
-// const result = createDataURIfromData(data,x,y);
-// let x = 0;
-// result.metaDataBuffer.map(data => {
-//   x += data.totalBufferLength;
-// });
+// let x = 472760;
+// let y = 190794;
+// const result = createDataURIfromData(data, x, y);

@@ -1,5 +1,5 @@
 import { Buffer } from 'buffer';
-import { calculateTileCenterInCartesian } from './helper.mjs';
+import { calculateTileCenter } from './helper.mjs';
 
 const data = [
   {
@@ -237,7 +237,7 @@ function localizeCoordinates(point, center) {
 export function createDataURIfromData(data) {
   let x = 472760;
   let y = 190794;
-  const tileCenter = calculateTileCenterInCartesian(x, y, 18);
+  const tileCenter = calculateTileCenter(x, y, 18);
   // Size per float in bytes
   const sizePerFloat = 4; // Float32Array uses 4 bytes per float
   // Number of floats per point (x, y, z)
